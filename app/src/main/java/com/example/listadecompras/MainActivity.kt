@@ -29,7 +29,18 @@ class MainActivity : AppCompatActivity() {
             } else {
                 et_item.error = "Preencha um valor"
             }
+        }
 
+        lv_lista_produtos.setOnItemLongClickListener{
+            adapterView, view, i, l ->
+            //buscando o item clicado
+            val item = produtosAdapter.getItem(i)
+
+            //removendo o item clicado da lista
+            produtosAdapter.remove(item)
+
+            //retorno indicando que o click foi realizado com sucesso
+            true
         }
 
 
