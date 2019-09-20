@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         val produtosAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
 
         //definindo o adaptador na lista
-        lv_lista.adapter = produtosAdapter
+        lv_lista_produtos.adapter = produtosAdapter
 
         bt_inserir.setOnClickListener(){
             val produto = et_item.text.toString()
@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
 
 
     }

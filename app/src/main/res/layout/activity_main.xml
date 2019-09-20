@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="Inserir"/>
     <ListView
-        android:id="@+id/lv_lista"
+        android:id="@+id/lv_lista_produtos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
