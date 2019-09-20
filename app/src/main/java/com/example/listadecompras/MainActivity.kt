@@ -20,8 +20,16 @@ class MainActivity : AppCompatActivity() {
         bt_inserir.setOnClickListener(){
             val produto = et_item.text.toString()
 
-            //adiciona item na lista
-            produtosAdapter.add(produto)
+            if(produto.isNotEmpty()){
+                //adiciona item na lista
+                produtosAdapter.add(produto)
+
+                //limpa a caixa de texto
+                et_item.text.clear()
+            } else {
+                et_item.error = "Preencha um valor"
+            }
+
         }
 
 
