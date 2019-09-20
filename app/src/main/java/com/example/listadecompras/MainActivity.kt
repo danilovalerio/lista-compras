@@ -17,7 +17,14 @@ class MainActivity : AppCompatActivity() {
         //definindo o adaptador na lista
         lv_lista.adapter = produtosAdapter
 
+        bt_inserir.setOnClickListener(){
+            val produto = et_item.text.toString()
 
-        
+            //adiciona item na lista
+            produtosAdapter.add(produto)
+        }
+
+
+
     }
 }
