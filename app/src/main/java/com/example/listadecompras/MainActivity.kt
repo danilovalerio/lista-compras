@@ -17,20 +17,6 @@ class MainActivity : AppCompatActivity() {
         //definindo o adaptador na lista
         lv_lista_produtos.adapter = produtosAdapter
 
-        bt_inserir.setOnClickListener(){
-            val produto = et_item.text.toString()
-
-            if(produto.isNotEmpty()){
-                //adiciona item na lista
-                produtosAdapter.add(produto)
-
-                //limpa a caixa de texto
-                et_item.text.clear()
-            } else {
-                et_item.error = "Preencha um valor"
-            }
-        }
-
         lv_lista_produtos.setOnItemLongClickListener{
             adapterView, view, i, l ->
             //buscando o item clicado
