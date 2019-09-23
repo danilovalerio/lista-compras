@@ -8,24 +8,21 @@
     android:layout_margin="8dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LISTA DE COMPRAS"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Digite o nome do produto"
-        android:id="@+id/et_item"/>
-
     <Button
         android:id="@+id/bt_inserir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Inserir"/>
+        android:text="Adicionar itens"/>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TOTAL: 0.00"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:id="@+id/tv_total"/>
+
     <ListView
         android:id="@+id/lv_lista_produtos"
         android:layout_width="wrap_content"
