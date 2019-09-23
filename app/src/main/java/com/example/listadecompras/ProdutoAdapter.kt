@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import java.text.NumberFormat
+import java.util.*
 
 /**
  * ProdutoAdapter recebe contexto como parâmetro
@@ -39,6 +41,10 @@ class ProdutoAdapter(contexto: Context) : ArrayAdapter<Produto>(contexto, 0){
         if(item?.foto != null){
             img_produto.setImageBitmap(item?.foto)
         }
+
+        //instancia do objeto de formatacao para valor em Reais
+        val f = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
+        txt_valor.text = f.format(item?.valor)
 
         return v
     }
