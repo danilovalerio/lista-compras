@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.NumberFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,6 +57,13 @@ class MainActivity : AppCompatActivity() {
 
         adapter.clear()
         adapter.addAll(produtosGlobal)
+
+        //substitui o for com a var abaixo
+        val soma = produtosGlobal.sumByDouble { it.valor * it.quantidade }
+
+        val f = NumberFormat.getCurrencyInstance(Locale("pt","br"))
+
+        tv_total.text = "TOTAL: ${f.format(soma)}"
 
 
 
