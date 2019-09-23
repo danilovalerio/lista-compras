@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 import java.text.NumberFormat
 import java.util.*
 
@@ -14,11 +15,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         bt_inserir.setOnClickListener(){
-            //Intent explícita
-            val intent = Intent(this, CadastroActivity::class.java)
 
-            //iniciando a activity
-            startActivity(intent)
+            startActivity<CadastroActivity>()
+
+
         }
 
         //Implementação do adaptador
