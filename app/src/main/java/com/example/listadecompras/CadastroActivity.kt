@@ -5,8 +5,11 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.provider.SyncStateContract.Helpers.insert
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_cadastro.*
+import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.toast
 
 class CadastroActivity : AppCompatActivity() {
 
@@ -25,14 +28,30 @@ class CadastroActivity : AppCompatActivity() {
 
             if(produto.isNotEmpty() && qtd.isNotEmpty() && valor.isNotEmpty()){
                 //adiciona item na lista
-                val prod = Produto(produto, qtd.toInt(), valor.toDouble(), imageBitMap)
-                produtosGlobal.add(prod)
+//                val prod = Produto(produto, qtd.toInt(), valor.toDouble(), imageBitMap)
+//                produtosGlobal.add(prod)
 
-                //limpa as edit's text's de texto
-                et_nome_prod.text.clear()
-                et_qtd_prod.text.clear()
-                et_valor_prod.text.clear()
-                iv_ic_camera.setImageResource(R.drawable.ic_produto_sem_foto)
+                database.use {
+                    val idProduto = insert(
+                        "Produtos","nome" to produto,
+                        "quantidade" to qtd,
+                        "valor" to valor.toDouble(),
+                        "foto" to imageBitMap)
+
+                    if(idProduto != -1L){
+                        toast("Inserido com sucesso")
+                        //limpa as edit's text's de texto
+                        et_nome_prod.text.clear()
+                        et_qtd_prod.text.clear()
+                        et_valor_prod.text.clear()
+                        iv_ic_camera.setImageResource(R.drawable.ic_produto_sem_foto)
+                    } else {
+                        toast("Erro ao inserir no banco de dados")
+                    }
+
+                }
+
+
 
             } else {
                 et_nome_prod.error = if(et_nome_prod.text.isEmpty()) "Preencha o nome do produto" else null
