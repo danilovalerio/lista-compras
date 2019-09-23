@@ -36,7 +36,7 @@ class CadastroActivity : AppCompatActivity() {
                         "Produtos","nome" to produto,
                         "quantidade" to qtd,
                         "valor" to valor.toDouble(),
-                        "foto" to imageBitMap)
+                        "foto" to imageBitMap?.toByteArray())//chamada da função imgBitmap para ByteArray
 
                     if(idProduto != -1L){
                         toast("Inserido com sucesso")
