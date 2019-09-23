@@ -1,10 +1,14 @@
 package com.example.listadecompras
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_cadastro.*
 
 class CadastroActivity : AppCompatActivity() {
+
+    val COD_IMAGE = 171
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,5 +34,28 @@ class CadastroActivity : AppCompatActivity() {
                 et_valor_prod.error = if(et_valor_prod.text.isEmpty()) "Preencha o valor do produto" else null
             }
         }
+
+        iv_ic_camera.setOnClickListener(){
+            abrirGaleria()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(resultCode == COD_IMAGE && resultCode == Activity.RESULT_OK){
+            if(data != null){
+                //nesse ponto podemos acessar a imagem escolhida através da variável "data"
+
+            }
+        }
+    }
+
+    fun abrirGaleria(){
+        //definindo a ação de conteúdo
+        intent.type = "image/*"
+
+        //inicializando a activity com resultado
+        startActivityForResult(Intent.createChooser(intent,"Selecione uma imagem"), COD_IMAGE)
     }
 }
