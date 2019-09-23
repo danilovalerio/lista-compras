@@ -2,7 +2,6 @@ package com.example.listadecompras
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.NumberFormat
@@ -21,8 +20,6 @@ class MainActivity : AppCompatActivity() {
             //iniciando a activity
             startActivity(intent)
         }
-
-
 
         //Implementação do adaptador
         val produtosAdapter = ProdutoAdapter(this)
@@ -64,8 +61,5 @@ class MainActivity : AppCompatActivity() {
         val f = NumberFormat.getCurrencyInstance(Locale("pt","br"))
 
         tv_total.text = "TOTAL: ${f.format(soma)}"
-
-
-
     }
 }

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:minHeight="50dp"
     android:orientation="horizontal"
-    android:padding="5dp">
+    android:padding="5dp"
+    android:gravity="center">
 
     <ImageView
         android:id="@+id/img_item_foto"
@@ -16,7 +17,7 @@
     <TextView
         android:id="@+id/tv_item_prod"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:text="descricao"
@@ -26,7 +27,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="right">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -35,15 +37,16 @@
 
             <TextView
                 android:id="@+id/tv_item_qtd"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:text="2"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Qtd."
+                android:text=" Qtd."
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -51,10 +54,12 @@
 
         <TextView
             android:id="@+id/tv_item_valor"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="2.00"/>
     </LinearLayout>
 
 </LinearLayout>
