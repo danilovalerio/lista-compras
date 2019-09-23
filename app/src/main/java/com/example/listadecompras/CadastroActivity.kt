@@ -17,9 +17,13 @@ class CadastroActivity : AppCompatActivity() {
 
             if(produto.isNotEmpty() && qtd.isNotEmpty() && valor.isNotEmpty()){
                 //adiciona item na lista
+                val prod = Produto(produto, qtd.toInt(), valor.toDouble())
+                produtosGlobal.add(prod)
 
-                //limpa a caixa de texto
+                //limpa as edit's text's de texto
                 et_nome_prod.text.clear()
+                et_qtd_prod.text.clear()
+                et_valor_prod.text.clear()
             } else {
                 et_nome_prod.error = if(et_nome_prod.text.isEmpty()) "Preencha o nome do produto" else null
                 et_qtd_prod.error = if(et_qtd_prod.text.isEmpty())"Preencha a quantidade do produto" else null
