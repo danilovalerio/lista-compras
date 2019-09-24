@@ -3,6 +3,9 @@ package com.example.listadecompras
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.db.parseList
+import org.jetbrains.anko.db.rowParser
+import org.jetbrains.anko.db.select
 import org.jetbrains.anko.startActivity
 import java.text.NumberFormat
 import java.util.*
@@ -13,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        bt_inserir.setOnClickListener(){
+        bt_inserir.setOnClickListener() {
 
             startActivity<CadastroActivity>()
 
@@ -28,8 +31,7 @@ class MainActivity : AppCompatActivity() {
         //definindo o adaptador na lista
         lv_lista_produtos.adapter = produtosAdapter
 
-        lv_lista_produtos.setOnItemLongClickListener{
-            adapterView, view, i, l ->
+        lv_lista_produtos.setOnItemLongClickListener { adapterView, view, i, l ->
             //buscando o item clicado
             val item = produtosAdapter.getItem(i)
 
@@ -45,19 +47,43 @@ class MainActivity : AppCompatActivity() {
     /**
      * onResume é chamado quando a tela vai aparecer independentemente se está voltando ou criando
      */
-    override fun onResume(){
+    override fun onResume() {
         super.onResume()
 
-        val adapter = lv_lista_produtos.adapter as ProdutoAdapter
+            val adapter = lv_lista_produtos.adapter as ProdutoAdapter
 
-        adapter.clear()
-        adapter.addAll(produtosGlobal)
+        database.use {
+            //efetuar a consulta no banco de dados
+            select("produtos").exec {
+                //Criando o parser que montará o objeto produto
+                val parser = rowParser { id: Int,
+                                         nome: String,
+                                         quantidade: Int,
+                                         valor: Double,
+                                         foto: ByteArray? ->
+                    //colunas do banco de dados
 
-        //substitui o for com a var abaixo
-        val soma = produtosGlobal.sumByDouble { it.valor * it.quantidade }
+                    //montagem do obj Produto com as colunas do banco
+                    Produto(id, nome, quantidade, valor, foto?.toBitMap())
+                }
 
-        val f = NumberFormat.getCurrencyInstance(Locale("pt","br"))
+                //criando a lista de produtos com dados do banco
+                var listaProdutos = parseList(parser)
 
-        tv_total.text = "TOTAL: ${f.format(soma)}"
+                //limpando os dados da lista e carregando as novas informações
+                adapter.clear()
+                adapter.addAll(listaProdutos)
+
+                //efetuando a multiplicação e soma da quantidade e valor
+                val soma = listaProdutos.sumByDouble {
+                    it.valor*it.quantidade
+                }
+
+                //formatando em formato moeda
+                val f = NumberFormat.getCurrencyInstance(Locale("pt","br"))
+                tv_total.text = "TOTAL: ${f.format(soma)}"
+
+            }
+        }
     }
 }
