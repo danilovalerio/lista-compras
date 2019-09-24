@@ -47,6 +47,20 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        lv_lista_produtos.setOnItemClickListener { adapterView, view, i, l ->
+            val item = produtosAdapter.getItem(i)
+
+            toast("Clique efetuado id: "+item!!.id.toString())
+
+            idProdutoEdicao = item.id
+
+            startActivity<EditarActivity>()
+
+            true
+        }
+
+
+
     }
 
     /**
@@ -55,7 +69,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-            val adapter = lv_lista_produtos.adapter as ProdutoAdapter
+        val adapter = lv_lista_produtos.adapter as ProdutoAdapter
 
         database.use {
             //efetuar a consulta no banco de dados

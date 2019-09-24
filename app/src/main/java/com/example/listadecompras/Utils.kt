@@ -23,3 +23,6 @@ fun Bitmap.toByteArray(): ByteArray {
 fun ByteArray.toBitMap() : Bitmap{
     return BitmapFactory.decodeByteArray(this, 0, this.size)
 }
+
+//item que será editado
+var idProdutoEdicao: Int = 0

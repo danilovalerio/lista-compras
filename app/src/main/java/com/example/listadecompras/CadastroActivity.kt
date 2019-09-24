@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.provider.SyncStateContract.Helpers.insert
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_cadastro.*
 import org.jetbrains.anko.db.insert
@@ -24,7 +23,6 @@ class CadastroActivity : AppCompatActivity() {
             val produto = et_nome_prod.text.toString()
             val qtd = et_qtd_prod.text.toString()
             val valor = et_valor_prod.text.toString()
-
 
             if(produto.isNotEmpty() && qtd.isNotEmpty() && valor.isNotEmpty()){
                 //adiciona item na lista
