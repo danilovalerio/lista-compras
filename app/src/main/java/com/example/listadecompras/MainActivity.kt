@@ -3,10 +3,7 @@ package com.example.listadecompras
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.db.delete
-import org.jetbrains.anko.db.parseList
-import org.jetbrains.anko.db.rowParser
-import org.jetbrains.anko.db.select
+import org.jetbrains.anko.db.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import java.text.NumberFormat
@@ -21,7 +18,6 @@ class MainActivity : AppCompatActivity() {
         bt_inserir.setOnClickListener() {
 
             startActivity<CadastroActivity>()
-
 
         }
 
@@ -102,5 +98,13 @@ class MainActivity : AppCompatActivity() {
             delete("produtos","id = {id}", "id" to idProd)
         }
 
+    }
+
+    fun atualizarProduto(idProd: Int){
+        database.use {
+            //atualiza tabela produtos, troca nome para teste
+            update("produtos","nome" to "Teste")
+                .whereArgs("id = {id}", "id" to 4)//como argumento id = id informado
+        }
     }
 }
