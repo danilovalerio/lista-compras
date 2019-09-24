@@ -3,10 +3,12 @@ package com.example.listadecompras
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.parseList
 import org.jetbrains.anko.db.rowParser
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 import java.text.NumberFormat
 import java.util.*
 
@@ -37,6 +39,13 @@ class MainActivity : AppCompatActivity() {
 
             //removendo o item clicado da lista
             produtosAdapter.remove(item)
+
+            //deletando do banco de dados
+            if (item != null) {
+                deletarProduto(item.id)
+            }
+
+            toast("Item deletado com sucesso!")
 
             //retorno indicando que o click foi realizado com sucesso
             true
@@ -85,5 +94,13 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
+    }
+
+    fun deletarProduto(idProd:Int){
+
+        database.use {
+            delete("produtos","id = {id}", "id" to idProd)
+        }
+
     }
 }
