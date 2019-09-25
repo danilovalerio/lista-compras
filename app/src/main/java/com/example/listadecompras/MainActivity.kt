@@ -16,9 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         bt_inserir.setOnClickListener() {
-
             startActivity<CadastroActivity>()
-
         }
 
         //Implementação do adaptador
@@ -46,6 +44,8 @@ class MainActivity : AppCompatActivity() {
             //retorno indicando que o click foi realizado com sucesso
             true
         }
+
+
 
         lv_lista_produtos.setOnItemClickListener { adapterView, view, i, l ->
             val item = produtosAdapter.getItem(i)
@@ -107,9 +107,43 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun deletarProduto(idProd:Int){
-
         database.use {
             delete("produtos","id = {id}", "id" to idProd)
+        }
+
+        val adapter = lv_lista_produtos.adapter as ProdutoAdapter
+
+        database.use {
+            //efetuar a consulta no banco de dados
+            select("produtos").exec {
+                //Criando o parser que montará o objeto produto
+                val parser = rowParser { id: Int,
+                                         nome: String,
+                                         quantidade: Int,
+                                         valor: Double,
+                                         foto: ByteArray? ->
+                    //colunas do banco de dados
+
+                    //montagem do obj Produto com as colunas do banco
+                    Produto(id, nome, quantidade, valor, foto?.toBitMap())
+                }
+
+                //criando a lista de produtos com dados do banco
+                var listaProdutos = parseList(parser)
+
+                //limpando os dados da lista e carregando as novas informações
+                adapter.clear()
+                adapter.addAll(listaProdutos)
+
+                //efetuando a multiplicação e soma da quantidade e valor
+                val soma = listaProdutos.sumByDouble {
+                    it.valor*it.quantidade
+                }
+
+                //formatando em formato moeda
+                val f = NumberFormat.getCurrencyInstance(Locale("pt","br"))
+                tv_total.text = "TOTAL: ${f.format(soma)}"
+            }
         }
 
     }

@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_cadastro.*
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.toast
 
+
 class CadastroActivity : AppCompatActivity() {
 
     val COD_IMAGE = 171
@@ -25,10 +26,6 @@ class CadastroActivity : AppCompatActivity() {
             val valor = et_valor_prod.text.toString()
 
             if(produto.isNotEmpty() && qtd.isNotEmpty() && valor.isNotEmpty()){
-                //adiciona item na lista
-//                val prod = Produto(produto, qtd.toInt(), valor.toDouble(), imageBitMap)
-//                produtosGlobal.add(prod)
-
                 database.use {
                     val idProduto = insert(
                         "Produtos","nome" to produto,
@@ -48,9 +45,6 @@ class CadastroActivity : AppCompatActivity() {
                     }
 
                 }
-
-
-
             } else {
                 et_nome_prod.error = if(et_nome_prod.text.isEmpty()) "Preencha o nome do produto" else null
                 et_qtd_prod.error = if(et_qtd_prod.text.isEmpty())"Preencha a quantidade do produto" else null
