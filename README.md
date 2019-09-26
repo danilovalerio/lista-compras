@@ -9,4 +9,6 @@
 ### Tela para cadastrar o produto
 ![](imgsReadme/telaCadastroProduto.png)
 
+### Gif de Teste
+![](imgsReadme/git_de_teste.gif)
 ##### Obs.: Aplicativo para fins acadêmicos.
