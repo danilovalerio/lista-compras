@@ -10,5 +10,5 @@
 ![](imgsReadme/telaCadastroProduto.png)
 
 ### Gif de Teste
-![](imgsReadme/git_de_teste.gif)
+![](imgsReadme/chavoDancing.gif)
 ##### Obs.: Aplicativo para fins acadêmicos.
