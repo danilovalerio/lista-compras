@@ -10,9 +10,14 @@
 ![](imgsReadme/telaCadastroProduto.png)
 
 ### Checklist features
+![](imgsReadme/giphy-coffecode.gif)
+
 - [x] Lista de compras carrega na tela inicial
 - [x] Botão para adicionar item
-- [ ] Tela de cadastrar item 
+- [x] Tela para cadastrar item
+- [] Total por item
+- [x] Total da lista
+ 
 
  
 ### Gif de Teste
