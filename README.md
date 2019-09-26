@@ -9,6 +9,12 @@
 ### Tela para cadastrar o produto
 ![](imgsReadme/telaCadastroProduto.png)
 
+### Checklist features
+- [x] Lista de compras carrega na tela inicial
+- [x] Botão para adicionar item
+- [ ] Tela de cadastrar item 
+
+ 
 ### Gif de Teste
 ![](imgsReadme/chavoDancing.gif)
 ##### Obs.: Aplicativo para fins acadêmicos.
