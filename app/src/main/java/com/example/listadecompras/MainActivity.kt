@@ -1,6 +1,7 @@
 package com.example.listadecompras
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.db.*
@@ -45,8 +46,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-
-
         lv_lista_produtos.setOnItemClickListener { adapterView, view, i, l ->
             val item = produtosAdapter.getItem(i)
 
@@ -58,9 +57,6 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
-
-
-
     }
 
     /**
@@ -83,11 +79,15 @@ class MainActivity : AppCompatActivity() {
                     //colunas do banco de dados
 
                     //montagem do obj Produto com as colunas do banco
+                    Log.d("PRODUTO","Id: "+id+" Tam. foto:"+foto?.size.toString())
                     Produto(id, nome, quantidade, valor, foto?.toBitMap())
                 }
 
+//                Log.d("PARSER",parseList(parser).toString())
+
                 //criando a lista de produtos com dados do banco
                 var listaProdutos = parseList(parser)
+
 
                 //limpando os dados da lista e carregando as novas informações
                 adapter.clear()
@@ -101,7 +101,6 @@ class MainActivity : AppCompatActivity() {
                 //formatando em formato moeda
                 val f = NumberFormat.getCurrencyInstance(Locale("pt","br"))
                 tv_total.text = "TOTAL: ${f.format(soma)}"
-
             }
         }
     }
@@ -144,15 +143,6 @@ class MainActivity : AppCompatActivity() {
                 val f = NumberFormat.getCurrencyInstance(Locale("pt","br"))
                 tv_total.text = "TOTAL: ${f.format(soma)}"
             }
-        }
-
-    }
-
-    fun atualizarProduto(idProd: Int){
-        database.use {
-            //atualiza tabela produtos, troca nome para teste
-            update("produtos","nome" to "Teste")
-                .whereArgs("id = {id}", "id" to 4)//como argumento id = id informado
         }
     }
 }
